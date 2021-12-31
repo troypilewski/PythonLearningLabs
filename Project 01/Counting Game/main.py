@@ -12,7 +12,7 @@ while play:
 
     if message == "yes":
         play = True
-        rules = "Take turns with the computer a select one of the provided values during your turn."
+        rules = "Take turns with the computer. Select one of the provided values during your turn."
         rules += "\nThe player to select 20 first wins the game."
         print(rules)
     else:

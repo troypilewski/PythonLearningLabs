@@ -8,5 +8,24 @@ def getPlayerName(firstName, lastName):
 
 def getPlayerValue(value):
     """Returns the players selected value"""
-    value = int(input("Please select from the following choices: [{}, {}, {}]: ".format(value + 1, value + 2, value + 3)))
+
+    if value + 3 > 20:
+        value1 = value + 1
+        value2 = value + 2
+        value3 = 20
+    elif value + 2 > 20:
+        value1 = value + 1
+        value2 = 20
+        value3 = 20
+    elif value + 1 > 20:
+        value1 = 20
+        value2 = 20
+        value3 = 20
+    else:
+        value1 = value + 1
+        value2 = value + 2
+        value3 = value + 3
+
+    value = int(input("Please select from the following choices: [{}, {}, {}]: ".format(value1, value2, value3)))
+
     return value
