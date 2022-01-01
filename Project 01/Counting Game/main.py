@@ -25,8 +25,9 @@ while play:
         value = 0
         print("The starting value is {}.".format(value))
         while value < 20:
-            print("The current value is {}.".format(value))
-            value = player.getPlayerValue(value)
+            # print("The current value is {}.".format(value))
+            selection = player.getPlayerValue(value)
+            value = player.validatePlayerValue(selection, value)
             print("{}'s selected value is {}.".format(playername["first"],value))
             if value >= 20:
                 print("{} won the game.".format(playername["first"]))

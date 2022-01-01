@@ -29,3 +29,18 @@ def getPlayerValue(value):
     value = int(input("Please select from the following choices: [{}, {}, {}]: ".format(value1, value2, value3)))
 
     return value
+
+def validatePlayerValue(selection, value):
+    """Validates the players selected value is within parameters"""
+
+    flag = selection > (value + 3)
+
+    while flag:
+        selection = getPlayerValue(value)
+        if selection < (value + 3):
+            value = selection
+            break
+        else:
+            print("The selected value is not a selectable value")
+
+    return value
