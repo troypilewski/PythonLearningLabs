@@ -35,12 +35,14 @@ def validatePlayerValue(selection, value):
 
     flag = selection > (value + 3)
 
+    print("The selected value is not a selectable option.")
+
     while flag:
         selection = getPlayerValue(value)
-        if selection < (value + 3):
+        if selection <= (value + 3):
             value = selection
             break
         else:
-            print("The selected value is not a selectable value")
+            print("The selected value is not a selectable option.")
 
     return value
