@@ -26,11 +26,7 @@ def getPlayerValue(value):
         value2 = value + 2
         value3 = value + 3
 
-    prompt = "Please select from the following values:"
-    prompt += "\n[{}] The value ({}) plus 1".format(value1, value)
-    prompt += "\n[{}] The value ({}) plus 2".format(value2, value)
-    prompt += "\n[{}] The value ({}) plus 3".format(value3, value)
-    prompt += "\n: "
+    prompt = "Please select from the following values [{}}, {}}, {}]: ".format(value1, value2, value3)
 
     value = int(input(prompt))
 

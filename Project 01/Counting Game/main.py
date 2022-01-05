@@ -3,6 +3,8 @@ import computer
 
 play = True
 
+numberOfPlayers = input("Select how many players [ 1 / 2 ]: ")
+
 playername = player.getPlayerName(
         input("What is your first name? "), input("What is you last name? ")
     )
