@@ -1,59 +1,71 @@
-import player
-import computer
+from players import Player
+from players import Computer
 
-play = True
+competitors = []
 
-numberOfPlayers = input("Select how many players [ 1 / 2 ]: ")
+numberOfCompetitors = int(input("How many players: [1 / 2]: "))
 
-playername = player.getPlayerName(
-        input("What is your first name? "), input("What is you last name? ")
-    )
+for player in range(numberOfCompetitors):
+    print("Player {}, answer the following questions...".format(player +1))
+    firstName = input("What is your first name? ")
+    lastName = input("What is your last name? ")
+    competitor = Player(first=firstName, last=lastName)
+    print(competitor.getProperName())
+    competitors.append(competitor)
 
-while play:
-    message = input("{}, Do you want to play a game? [yes/no]: ".format(playername["first"]))
+# print(len(competitors))
 
-    if message == "yes":
-        play = True
-        rules = "Take turns with the computer. Select one of the provided values during your turn."
-        rules += "\nThe player to select 20 first wins the game."
-        print(rules)
-    else:
-        play = False
-        break
+flag = input("Do you want to read the rules? [yes / no] ")
 
-    message = input("{}, Do you want to go first? [yes/no]: ".format(playername["first"]))
+if flag == "yes":
+    rules = "Take turns with your opponent. Select one of the provided values during your turn."
+    rules += "\nThe player to reach 20 first wins."
+    print(rules)
 
-    if message == "yes":
+if len(competitors) == 2:
+    token = True
+    while token:
         value = 0
-        print("The starting value is {}.".format(value))
-        while value < 20:
-            # print("The current value is {}.".format(value))
-            selection = player.getPlayerValue(value)
-            value = player.validatePlayerValue(selection, value)
-            print("{}'s selected value is {}.".format(playername["first"],value))
-            if value >= 20:
-                print("{} won the game.".format(playername["first"]))
-                print("Thank you for playing, {}".format(playername["first"]))
-                break
-            value = computer.getComputerValue(value)
-            print("The computer's selected value is {}.".format(value))
-            if value >= 20:
-                print("The Computer wan the game.")
-                print("Thank you for playing, {}".format(playername["first"]))
-                break
+        print("The current value is: {}".format(value))
+        while value <= 20:
+            for competitor in competitors:
+                print("It is {}'s turn.".format(competitor.first.title()))
+                selection = competitor.selectValue(value)
+                value = competitor.validateSelectedValue(selection, value)
+                print("{} selected the value: {}".format(competitor.first.title(), value))
+                if value == 20:
+                    print("{} won the game.".format(competitor.first.title()))
+                    print("Thank you playing.")
+                    break
+
+    play = input("Do you want to play again? [yes / no] ")
+    if play == "yes":
+        token = True
     else:
+        token = False
+
+else:
+    token = True
+    while token:
+        computer = Computer()
         value = 0
-        print("The starting value is {}.".format(value))
-        while value < 20:
-            print("The current value is {}.".format(value))
-            value = computer.getComputerValue(value)
-            print("The computer's selected value is {}.".format(value))
-            if value >= 20:
-                print("The Computer wan the game.")
+        print("The current value is: {}".format(value))
+        while value <= 20:
+            selection = competitors[0].selectValue(value)
+            value = competitors[0].validateSelectedValue(selection, value)
+            print("{} selected the value: {}".format(competitors[0].first.title(), value))
+            if value == 20:
+                print("{} won the game.".format(competitors[0].first.title()))
+                print("Thank you for playing, {}".format(competitors[0].first.title()))
                 break
-            selection = player.getPlayerValue(value)
-            value = player.validatePlayerValue(selection, value)
-            print("{}'s selected value is {}.".format(playername["first"],value))
-            if value >= 20:
-                print("{} won the game.".format(playername["first"]))
+            value = computer.selectValue(value)
+            print("The {} selected the value: {}".format(computer.name.title(), value))
+            if value == 20:
+                print("The {} won the game.".format(computer.name.title()))
                 break
+        
+        play = input("Do you want to play again? [yes / no] ")
+        if play == "yes":
+            token = True
+        else:
+            token = False
